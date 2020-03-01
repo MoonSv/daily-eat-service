@@ -31,7 +31,6 @@ public class UserService implements UserDetailsService {
     public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserMapper userMapper) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userMapper = userMapper;
-//        save("hello", "world");
     }
 
     public void save(String username, String password) {
@@ -47,7 +46,6 @@ public class UserService implements UserDetailsService {
         String password = user.getEncryptedPassword();
 
         return new User(username, password, Collections.emptyList());
-
     }
 
     public com.daily.eat.dao.User getUserByUsername(String username) {

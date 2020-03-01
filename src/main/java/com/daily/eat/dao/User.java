@@ -26,6 +26,12 @@ public class User {
     private Instant createdAt;
     private Instant updatedAt;
 
+    public User(String id, String name, String encryptedPassword) {
+        this.id = id;
+        this.name = name;
+        this.encryptedPassword = encryptedPassword;
+    }
+
     public String getId() {
         return id;
     }

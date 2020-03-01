@@ -121,3 +121,9 @@ curl -H "content-type:application/json" -d '{"username":"zoegxy","password"
 curl -H "content-type:application/json" -d '{"username":"zoegxy","password"
 :"password"}' "http://localhost:8080/auth/login" -i
 ```
+
+
+
+##UNIT TEST
+
+Junit 5 + Mockito
