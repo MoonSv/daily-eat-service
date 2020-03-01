@@ -7,6 +7,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,7 +38,8 @@ public class AuthController {
 
     @GetMapping("/auth")
     public Object auth() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication == null?null:authentication.getName();
         User user = userService.getUserByUsername(username);
         if (user == null) {
             return GlobalResult.fail("use have not logged in", null);
@@ -84,7 +86,6 @@ public class AuthController {
             authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(token);
             User user = userService.getUserByUsername(username);
-
             return GlobalResult.success("login success", user);
         } catch (BadCredentialsException e) {
             return GlobalResult.fail("Wrong password", null);
