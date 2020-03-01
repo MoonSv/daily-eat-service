@@ -1,4 +1,4 @@
-String dockerTag = dateFormat.format(new Date())
+String dockerTag = new Date().format('yyyyMMddHHmmss');
 node {
     checkout scm
     stage 'test & package'
