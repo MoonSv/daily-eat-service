@@ -1,4 +1,4 @@
-package com.daily.eat.dao;
+package com.daily.eat.mapper;
 
 import com.daily.eat.model.DailyRecord;
 import com.daily.eat.model.FoodRef;

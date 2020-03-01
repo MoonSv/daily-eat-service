@@ -1,6 +1,6 @@
 package com.daily.eat.controller;
 
-import com.daily.eat.dao.FoodMapper;
+import com.daily.eat.mapper.FoodMapper;
 import com.daily.eat.model.DailyRecord;
 import com.daily.eat.model.FoodRef;
 import org.springframework.beans.factory.annotation.Autowired;

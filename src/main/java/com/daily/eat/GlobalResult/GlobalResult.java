@@ -28,8 +28,8 @@ public class GlobalResult {
         this.user = user;
     }
 
-    public static GlobalResult success(User user) {
-        return new GlobalResult("ok", "登陆成功", true, user);
+    public static GlobalResult success(String msg, User user) {
+        return new GlobalResult("ok", msg, true, user);
     }
 
     public static GlobalResult fail(String msg, User user) {
