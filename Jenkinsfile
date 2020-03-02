@@ -2,10 +2,6 @@ String dockerTag = new Date().format('yyyyMMddHHmmss');
 node {
     checkout scm
 
-    stage('git pull')
-
-    sh('git pull')
-
     stage 'test & package'
 
     sh('./mvnw clean package')

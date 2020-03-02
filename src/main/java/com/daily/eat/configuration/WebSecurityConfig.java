@@ -23,8 +23,8 @@ import javax.inject.Inject;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserDetailsService userDetailsService;
+//    @Autowired
+//    UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,10 +42,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     // customize the encoder algorithm
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
+//        builder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
