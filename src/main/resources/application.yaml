@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    password: root
-    url: jdbc:mysql://localhost:3306/eat?characterEncoding=utf8&useSSL=false
+    password: justwe77
+    url: jdbc:mysql://172.17.0.10:3306/eat?characterEncoding=utf8&useSSL=false
     username: root
 mybatis:
   configuration:

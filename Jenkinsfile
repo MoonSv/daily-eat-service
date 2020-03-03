@@ -12,6 +12,6 @@ node {
 
     stage('docker run')
 
-    sh("docker rm -f daily-eat")
+
     sh("docker run -it -d --name daily-eat -p 8090:8080 207.148.65.251/daily-eat:${dockerTag}")
 }
