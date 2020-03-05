@@ -3,6 +3,9 @@ package com.daily.eat.controller;
 import com.daily.eat.GlobalResult.GlobalResult;
 import com.daily.eat.dao.User;
 import com.daily.eat.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +28,7 @@ import java.util.Map;
  * @author: Moon
  * @create: 2020-02-27 10:12
  **/
+@Api(tags = "User Authentication")
 @RestController
 public class AuthController {
     UserService userService;
@@ -35,23 +39,34 @@ public class AuthController {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
     }
-
-    @GetMapping("/auth")
+    @ApiOperation(value = "Check user login status", notes = "love gxy")
+    @GetMapping(value = "/auth")
     public Object auth() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication == null?null:authentication.getName();
         User user = userService.getUserByUsername(username);
         if (user == null) {
-            return GlobalResult.fail("use have not logged in", null);
+            return GlobalResult.fail("user have not logged in", null);
         } else {
             return GlobalResult.success("user have logged in", user);
         }
     }
 
+    @ApiOperation("User registration")
     @PostMapping("/auth/register")
-    public GlobalResult register(@RequestBody Map<String, String> usernameAndPassword) {
-        String username = usernameAndPassword.get("username");
-        String password = usernameAndPassword.get("password");
+    public GlobalResult register(@ApiParam(name = "username and password", defaultValue = "{}") @RequestBody Map<String, String> usernameAndPassword) {
+        // 判断参数个数
+        if (usernameAndPassword.keySet().size() != 2) {
+            return GlobalResult.fail("please only input two parameters: 'username' and 'password'",null);
+        }
+        String username;
+        String password;
+        try {
+            username = usernameAndPassword.get("username");
+            password = usernameAndPassword.get("password");
+        } catch (NullPointerException e) {
+            return GlobalResult.fail("please only input two parameters: 'username' and 'password'",null);
+        }
 
         if (username == null || password == null) {
             return GlobalResult.fail("username or password cannot not null", null);
@@ -70,8 +85,9 @@ public class AuthController {
         }
     }
 
+    @ApiOperation("User login")
     @PostMapping("/auth/login")
-    public GlobalResult login(@RequestBody Map<String, String> usernameAndPassword) {
+    public GlobalResult login(@ApiParam(name = "username and password", defaultValue = "{}") @RequestBody Map<String, String> usernameAndPassword) {
         String username = usernameAndPassword.get("username");
         String password = usernameAndPassword.get("password");
         UserDetails userDetails;
@@ -92,6 +108,7 @@ public class AuthController {
         }
     }
 
+    @ApiOperation("User logout")
     @GetMapping("/auth/logout")
     public GlobalResult logout() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -35,4 +35,36 @@ public class GlobalResult {
     public static GlobalResult fail(String msg, User user) {
         return new GlobalResult("fail", msg, false, user);
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public boolean isLogIn() {
+        return isLogIn;
+    }
+
+    public void setLogIn(boolean logIn) {
+        isLogIn = logIn;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
